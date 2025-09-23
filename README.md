@@ -1,4 +1,4 @@
-#Booking Backend
+# Booking Backend
 
 This is the backend of the Booking Table project, built with Express.js and PostgreSQL.
 It provides APIs for managing sessions (events), users, and reservations.
@@ -6,7 +6,7 @@ It provides APIs for managing sessions (events), users, and reservations.
 
 Ready to connect with the frontend (React + FullCalendar)
 
-#Tech Stack
+# Tech Stack
 
 Node.js
 
@@ -18,7 +18,7 @@ TypeScript (if your backend is TS)
 
 dotenv for environment variables
 
-#Setup
+# Setup
 1. Clone the repository
 git clone https://github.com/bigerfan/booking-backend.git
 cd booking-backend
@@ -28,13 +28,18 @@ npm install
 
 3. Setup environment variables
 
-#Create a .env file in the root directory:
+# Create a .env file in the root directory:
 
 PORT=5000
+
 DB_HOST=localhost
+
 DB_PORT=5432
+
 DB_USER=postgres
+
 DB_PASSWORD=yourpassword
+
 DB_NAME=booking_db
 
 4. Run database migrations (if using Sequelize/Prisma)
