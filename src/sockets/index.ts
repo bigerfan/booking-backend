@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
-import formatedRooms from "../utils/socketUtils";
+import { formatedRooms } from "../utils/socketUtils";
 import registerTableHandlers from "./tableSocket";
+import { getAdminPanelInfo } from "../socketHandlers/tableSockets";
 // import registerSessionHandlers from "./sessionSocket";
 
 export function initSocket(httpServer: any) {
@@ -16,10 +17,7 @@ export function initSocket(httpServer: any) {
 
     socket.on("disconnect", () => {
       console.log("Client disconnected:", socket.id);
-      const rooms = io.sockets.adapter.rooms;
-      const tableRooms = formatedRooms(rooms);
-
-      io.to("overview_users").emit("tables", tableRooms);
+      getAdminPanelInfo(socket, io);
     });
   });
 

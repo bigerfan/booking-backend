@@ -1,4 +1,4 @@
-const formatedRooms = (rooms: Map<string, Set<string>>) => {
+export const formatedRooms = (rooms: Map<string, Set<string>>) => {
   const formated = Array.from(rooms.entries())
     .filter(([roomName, sockets]) => roomName.startsWith("table:"))
     .map(([roomName, sockets]) => ({
@@ -8,5 +8,3 @@ const formatedRooms = (rooms: Map<string, Set<string>>) => {
     }));
   return formated;
 };
-
-export default formatedRooms;

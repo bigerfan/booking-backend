@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { initModels } from "../models/init-models";
+import { sendSmsToInvitedPeople } from "../utils/smsUtils";
 
 const reservations = initModels().reservations;
 
@@ -42,6 +43,19 @@ export const createSession = async (req: Request, res: Response) => {
       end_time: endTime,
       title,
     });
+
+    await Promise.all(
+      invitedPeople.map((person: { phoneNumber: string; fullName: string }) =>
+        sendSmsToInvitedPeople(
+          person.phoneNumber,
+          person.fullName,
+          title,
+          startedTime.toString(),
+          endTime.toString()
+        )
+      )
+    );
+
     res.status(200).json({ message: "session created", success: true });
   } catch (error) {
     res.status(500).json({ message: "server error", success: false });

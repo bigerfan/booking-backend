@@ -1,13 +1,10 @@
 import express from "express";
 import cors from "cors";
-import path from "path";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import { createServer } from "http";
 import { Server } from "socket.io";
-import formatedRooms from "./utils/socketUtils";
 import sessionRouter from "./routes/session";
-import sequelize from "./config/database";
 import { initSocket } from "./sockets";
 
 dotenv.config();
