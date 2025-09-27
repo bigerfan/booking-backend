@@ -23,8 +23,8 @@ export const getAdminPanelInfo = async (socket: Socket, io: Server) => {
       },
     },
   });
-  console.log(todaySessions);
+  // console.log(todaySessions);
 
-  io.to("overview_users").emit("adminInfo", { tableRooms, todaySessions });
-  console.log("run shod");
+  io.to("overview-users").emit("adminInfo", { tableRooms, todaySessions });
+  // console.log("run shod");
 };

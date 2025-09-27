@@ -26,13 +26,21 @@ export const sendSmsToInvitedPeople = async (
     .locale("fa")
     .format("HH:mm");
 
-  console.log(persianDate, startedHour, endHour);
+  // console.log(persianDate, startedHour, endHour);
+  const LRM = "\u200E";
+  const RLM = "\u200F"; // Right-to-Left Mark
 
+  const text = `سلام ${fullName} عزیز شما به جلسه ${sessionTitle} در تاریخ ${persianDate} و ساعت ${startedHour} - ${endHour} دعوت شده اید `;
+
+  // const text = `${fullName} عزیز شما به جلسه ${sessionTitle} در تاریخ \u202A${persianDate}\u202C و ساعت \u202A${startedHour} - ${endHour}\u202C دعوت شده اید`;
+  // console.log(text);
+
+  // console.log("text :", text);
   try {
     axios.get("https://api.sms-webservice.com/api/V3/Send", {
       params: {
         apikey: process.env.SMS_SECRET,
-        text: `${fullName} عزیز شما به جلسه ${sessionTitle} در تاریخ ${persianDate} و ساعت ${startedHour} - ${endHour} دعوت شده اید`,
+        text,
         sender: process.env.SMS_SENDER_PHONENUMBER,
         Recipients: phone,
       },
@@ -41,4 +49,6 @@ export const sendSmsToInvitedPeople = async (
     console.log(error);
     return error;
   }
+
+  return text;
 };

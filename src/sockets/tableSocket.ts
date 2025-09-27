@@ -8,7 +8,8 @@ import { Server, Socket } from "socket.io";
 const Sessions = initModels().reservations;
 
 export default function registerTableHandlers(io: Server, socket: Socket) {
-  socket.on("register_table", async (id: number) => {
+  // when someone enter in a table
+  socket.on("register-table", async (id: number) => {
     socket.join(`table:${id}`);
 
     // const rooms = io.sockets.adapter.rooms;
@@ -21,13 +22,15 @@ export default function registerTableHandlers(io: Server, socket: Socket) {
     socket.emit("sessions", sessions);
   });
 
-  socket.on("join_overview", () => {
-    socket.join("overview_users");
+  // when someone enter on admin panel
+  socket.on("join-overview", () => {
+    socket.join("overview-users");
     getAdminPanelInfo(socket, io);
   });
 
+  // when someone create a newsession
   socket.on("new-session", async (tableId: string) => {
-    console.log(tableId);
+    // console.log(tableId);
     const formatedId = tableId.toString();
     const sessions = await Sessions.findAll({
       where: { table_id: formatedId },
@@ -36,8 +39,9 @@ export default function registerTableHandlers(io: Server, socket: Socket) {
     await getAdminPanelInfo(socket, io);
   });
 
-  socket.on("leave-table", (tableId: string) => {
+  // when someone leave table
+  socket.on("leave-table", async (tableId: string) => {
     socket.leave(`table:${tableId}`);
-    getAdminPanelInfo(socket, io);
+    await getAdminPanelInfo(socket, io);
   });
 }
