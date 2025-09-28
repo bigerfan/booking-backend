@@ -29,7 +29,7 @@ app.use("/api/session", sessionRouter);
 
 initSocket(httpServer);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 httpServer.listen(port, () => {
   console.log(`Server is running on port ${port}`);
