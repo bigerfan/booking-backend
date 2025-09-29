@@ -30,7 +30,8 @@ export const sendSmsToInvitedPeople = async (
   const LRM = "\u200E";
   const RLM = "\u200F"; // Right-to-Left Mark
 
-  const text = `سلام ${fullName} عزیز شما به جلسه ${sessionTitle} در تاریخ ${persianDate} و ساعت ${startedHour} - ${endHour} دعوت شده اید `;
+  const text = `سلام ${fullName} عزیز شما به جلسه ${sessionTitle} در تاریخ ${persianDate} و ساعت ${startedHour} - ${endHour} دعوت شده اید 
+  شرکت هوشمند سازی نویان`;
 
   // const text = `${fullName} عزیز شما به جلسه ${sessionTitle} در تاریخ \u202A${persianDate}\u202C و ساعت \u202A${startedHour} - ${endHour}\u202C دعوت شده اید`;
   // console.log(text);
