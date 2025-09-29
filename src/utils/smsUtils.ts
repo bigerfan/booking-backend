@@ -38,14 +38,14 @@ export const sendSmsToInvitedPeople = async (
 
   // console.log("text :", text);
   try {
-    // axios.get("https://api.sms-webservice.com/api/V3/Send", {
-    //   params: {
-    //     apikey: process.env.SMS_SECRET,
-    //     text,
-    //     sender: process.env.SMS_SENDER_PHONENUMBER,
-    //     Recipients: phone,
-    //   },
-    // });
+    axios.get("https://api.sms-webservice.com/api/V3/Send", {
+      params: {
+        apikey: process.env.SMS_SECRET,
+        text,
+        sender: process.env.SMS_SENDER_PHONENUMBER,
+        Recipients: phone,
+      },
+    });
     console.log(text);
   } catch (error) {
     console.log(error);
