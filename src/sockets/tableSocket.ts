@@ -29,7 +29,7 @@ export default function registerTableHandlers(io: Server, socket: Socket) {
   });
 
   // when someone create a newsession
-  socket.on("new-session", async (tableId: string) => {
+  socket.on("update-session", async (tableId: string) => {
     // console.log(tableId);
     const formatedId = tableId.toString();
     const sessions = await Sessions.findAll({

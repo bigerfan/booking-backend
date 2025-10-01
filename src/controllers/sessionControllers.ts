@@ -70,3 +70,32 @@ export const createSession = async (req: Request, res: Response) => {
     return;
   }
 };
+
+export const deleteSession = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  console.log(id);
+
+  if (!id) {
+    res
+      .status(400)
+      .json({ message: "the sessionid is required", success: false });
+    return;
+  }
+
+  try {
+    const target = await reservations.findByPk(id);
+
+    if (!target) {
+      res.status(404).json({ message: "cant find session", success: false });
+      return;
+    }
+
+    await target.destroy();
+    res.status(200).json({ message: "session is deleted", success: true });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "server error", success: false });
+    return;
+  }
+};

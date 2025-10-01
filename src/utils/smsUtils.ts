@@ -31,7 +31,7 @@ export const sendSmsToInvitedPeople = async (
   const RLM = "\u200F"; // Right-to-Left Mark
 
   const text = `
-  سلام ${fullName} عزیز شما به جلسه ${sessionTitle} در تاریخ ${persianDate} و ساعت ${startedHour} - ${endHour} دعوت شده اید 
+  سلام ${fullName} عزیز شما به جلسه با موضوع${sessionTitle} در تاریخ ${persianDate} و ساعت ${startedHour} - ${endHour} دعوت شده اید 
   شرکت هوشمند سازی نویان
   `;
 
