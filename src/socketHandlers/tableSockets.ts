@@ -5,7 +5,10 @@ import { Server, Socket } from "socket.io";
 
 const Sessions = initModels().reservations;
 
-export const getAdminPanelInfo = async (socket: Socket, io: Server) => {
+export const getAdminPanelInfo = async (
+  socket: Socket | undefined,
+  io: Server
+) => {
   const rooms = io.sockets.adapter.rooms;
   const tableRooms = formatedRooms(rooms);
 

@@ -7,6 +7,8 @@ import { getAdminPanelInfo } from "../socketHandlers/tableSockets";
 export function initSocket(httpServer: any) {
   const io = new Server(httpServer, {
     cors: { origin: "*" },
+    pingInterval: 25000, // send pings every 25s
+    pingTimeout: 60000,
   });
 
   io.on("connection", (socket) => {

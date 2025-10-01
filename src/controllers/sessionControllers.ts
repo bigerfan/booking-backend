@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { initModels } from "../models/init-models";
 import { sendSmsToInvitedPeople } from "../utils/smsUtils";
 import sequelize from "../config/database";
+import { initedIo } from "../server";
+import { getAdminPanelInfo } from "../socketHandlers/tableSockets";
 
 const reservations = initModels().reservations;
 
@@ -61,6 +63,11 @@ export const createSession = async (req: Request, res: Response) => {
       )
     );
     await transaction?.commit();
+    const sessions = await reservations.findAll({
+      where: { table_id: tableId },
+    });
+    initedIo.to(`table:${tableId}`).emit("sessions", sessions);
+    await getAdminPanelInfo(undefined, initedIo);
 
     res.status(200).json({ message: "session created", success: true });
   } catch (error) {
@@ -86,12 +93,21 @@ export const deleteSession = async (req: Request, res: Response) => {
   try {
     const target = await reservations.findByPk(id);
 
+    const tableId = target?.table_id;
+
     if (!target) {
       res.status(404).json({ message: "cant find session", success: false });
       return;
     }
 
     await target.destroy();
+
+    const sessions = await reservations.findAll({
+      where: { table_id: tableId },
+    });
+    initedIo.to(`table:${tableId}`).emit("sessions", sessions);
+    await getAdminPanelInfo(undefined, initedIo);
+
     res.status(200).json({ message: "session is deleted", success: true });
   } catch (error) {
     console.log(error);

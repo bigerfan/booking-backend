@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 
 app.use("/api/session", sessionRouter);
 
-initSocket(httpServer);
+export const initedIo = initSocket(httpServer);
 
 const port = process.env.PORT || 5001;
 

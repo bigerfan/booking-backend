@@ -29,15 +29,15 @@ export default function registerTableHandlers(io: Server, socket: Socket) {
   });
 
   // when someone create a newsession
-  socket.on("update-session", async (tableId: string) => {
-    // console.log(tableId);
-    const formatedId = tableId.toString();
-    const sessions = await Sessions.findAll({
-      where: { table_id: formatedId },
-    });
-    io.to(`table:${tableId}`).emit("sessions", sessions);
-    await getAdminPanelInfo(socket, io);
-  });
+  // socket.on("update-session", async (tableId: string) => {
+  //   // console.log(tableId);
+  //   const formatedId = tableId.toString();
+  //   const sessions = await Sessions.findAll({
+  //     where: { table_id: formatedId },
+  //   });
+  //   io.to(`table:${tableId}`).emit("sessions", sessions);
+  //   await getAdminPanelInfo(socket, io);
+  // });
 
   // when someone leave table
   socket.on("leave-table", async (tableId: string) => {
